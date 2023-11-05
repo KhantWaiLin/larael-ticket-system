@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="w-screen flex flex-col justify-center items-center" style="height: calc(100vh - 4em)">
         <h1 class="flex justify-center items-center">Create a new support ticket</h1>
-        <form method="post" action="{{route('ticket.store')}}" class="w-[20em] mt-2 bg-gray-200 p-5 rounded-lg">
+        <form method="post" action="{{route('ticket.store')}}" class="w-[20em] mt-2 bg-gray-200 p-5 rounded-lg" enctype="multipart/form-data">
             @csrf
             @method('post')
             <div class="mb-2">
