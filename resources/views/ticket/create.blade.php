@@ -6,12 +6,12 @@
             @method('post')
             <div class="mb-2">
                 <x-input-label for="title" value="Title" />
-                <x-text-input class="w-full mt-1" id="title" name="title" type="text" placeholder="title" value="" required autofocus autocomplete="title" />
+                <x-text-input class="w-full mt-1" id="title" name="title" type="text" placeholder="title" value="" autofocus autocomplete="title" />
                 <x-input-error class="mt-2" :messages="$errors->get('title')" />
             </div>
             <div class="mb-2">
                 <x-input-label for="description" value="Description" />
-                <x-text-area  placeholder="Add description" name="description" id="description" class="w-full mt-1" />
+                <x-text-area placeholder="Add description" name="description" id="description" class="w-full mt-1" />
                 <x-input-error class="mt-2" :messages="$errors->get('description')" />
             </div>
             <div>
