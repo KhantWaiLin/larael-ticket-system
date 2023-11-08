@@ -6,5 +6,10 @@
     @endif
     <p>Created by {{$user->name}}</p>
     <span>{{$ticket->created_at}}</span>
+    <div>
+        <a href="{{route('ticket.edit',$ticket)}}">
+            <x-primary-button>Edit</x-primary-button>
+        </a>
+    </div>
 
 </x-app-layout>
