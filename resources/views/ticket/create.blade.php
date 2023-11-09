@@ -11,7 +11,7 @@
             </div>
             <div class="mb-2">
                 <x-input-label for="description" value="Description" />
-                <x-text-area placeholder="Add description" name="description" id="description" class="w-full mt-1" />
+                <x-text-area placeholder="Add description" name="description" id="description" class="w-full mt-1" value="" />
                 <x-input-error class="mt-2" :messages="$errors->get('description')" />
             </div>
             <div>
