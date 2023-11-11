@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Models\Ticket;
 use App\Models\User;
+use App\Notifications\TicketUpdateNotification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -16,7 +17,10 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::all();
+        // $tickets = Ticket::all();
+        $user = auth()->user();
+        //Ticket::latest()->get()
+        $tickets = $user->isAdmin ? Ticket::orderBy('created_at', 'desc')->get() : $user->tickets;
         // return view('ticket.index', ['tickets' => $tickets]);
         return view('ticket.index', compact('tickets'));
     }
@@ -71,6 +75,11 @@ class TicketController extends Controller
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
         $ticket->update($request->except('attachment'));
+        if ($request->has('status')) {
+            // $user = User::find($ticket->user_id);
+            $ticket->user->notify(new TicketUpdateNotification($ticket));
+            // return (new TicketUpdateNotification($ticket))->toMail($user);
+        }
         if ($request->file('attachment')) {
             Storage::disk('public')->delete($ticket->attachment);
             $this->storeAttachment($request, $ticket);
